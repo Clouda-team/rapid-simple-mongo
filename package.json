@@ -1,0 +1,19 @@
+{
+  "name": "rapid-simple-mongo",
+  "version": "0.0.0",
+  "description": "",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rapid",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "wangsu01@baidu.com",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "^1.4.7"
+  }
+}
