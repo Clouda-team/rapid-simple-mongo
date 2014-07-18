@@ -115,7 +115,7 @@ var sortAgent = function(dburl,opts){
 		default:
 			throw new Error("dburl mast be a connection uri or connection object");
 	}
-	
+	var reconnect = 0;
 	var connect = this.__connect = function(){
 		
 		if(isConnecting == true || isConnect == true){
@@ -128,13 +128,21 @@ var sortAgent = function(dburl,opts){
 		MongoClient.connect(__dburl,opts || {} ,function(err,_db){
 			
 			if(err){
-				me.emit("error",err);
+				isConnecting = false;
+				
+				if(reconnect++ < 10){
+					log.err("reconnect : " + err.message + ", " + reconnect);
+					setTimeout(connect,4000);
+				}else{
+					me.emit("error",err);
+				}
 				return;
 			}
 			
 			log.info("connect to mongodb, %s" , __dburl);
 			isConnect = true;
 			isConnecting = false;
+			reconnect = 0;
 			db = _db;
 			setImmediate(doJob);
 		});
