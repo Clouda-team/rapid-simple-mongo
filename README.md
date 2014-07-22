@@ -1,5 +1,4 @@
 #rapid-simple-mongo
-===================
 
 > simple to use the mongodb 
 
